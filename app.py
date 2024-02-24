@@ -28,7 +28,7 @@ def get_post(post_id):
         abort(404)
     return post
 
-
+#get a specific post
 @app.route('/posts/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
