@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
-from db.db import get_db_connection
+from database.db import get_db_connection
 posts_blueprint = Blueprint('posts_blueprint', __name__, template_folder='templates')
 
 #get all posts
