@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="text-center" style="display: flex;align-items: center;padding-top: 40px;padding-bottom: 40px;">
+        <form action="" method="POST" class="form-signin w-100 m-auto" style="max-width: 330px;padding: 15px;">
+            {{ form.hidden_tag() }}
+            <h1 class="h3 mb-3 fw-normal">Reset Password</h1>
+            <img class="mb-4" src="{{ url_for('static', filename='logo.png') }}" alt="" width="72" height="72">
+
+
+            <div class="form-floating">
+                {% if form.password.errors %}
+                    {{ form.password(style="margin-bottom: 10px;border-top-left-radius: 0;border-top-right-radius: 0;", type="password", class=" is-invalid form-control", id="floatingPassword", placeholder="Password") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password(style="margin-bottom: -1px;border-top-right-radius: 0;border-top-left-radius: 0;", type="password", class="form-control", id="floatingPassword", placeholder="Password") }}
+                {% endif %}
+                {{ form.password.label(class="form-control-label", for="floatingPassword") }}
+            </div>
+
+            <div class="form-floating">
+                {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(style="margin-bottom: -1px;border-bottom-right-radius: 0;border-bottom-left-radius: 0;", type="email", class=" is-invalid form-control", id="floatingInput", placeholder="Confirm password") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.confirm_password(style="margin-bottom: -1px;border-bottom-right-radius: 0;border-bottom-left-radius: 0;", type="email", class="form-control", id="floatingInput", placeholder="Confirm password") }}
+                {% endif %}
+                {{ form.confirm_password.label(class="form-control-label", for="floatingInput") }}
+            </div>
+
+            {{ form.submit(class="w-100 btn btn-lg btn-primary mt-3") }}
+
+            <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+        </form>
+    </div>
+{% endblock content %}

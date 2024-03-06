@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row g-5">
+        <div class="col-md-8 mb-5">
+            {% for post in posts.items %}
+                <div class="row">
+                    <div class="col-1">
+                         <img height="50px" style="object-fit: cover" class="rounded-circle avatar account-img mt-3 mb-3" width="50px" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"/>
+                    </div>
+                    <div class="col-11">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">by <a class="link-secondary"
+                                        href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+                                    from {{ post.date_posted.strftime('%d %b %Y %H:%M:%S') }}</h6>
+                                <p class="card-text">{{ post.content }}</p>
+                                {% if post.author == current_user %}
+                                    <a href="{{ url_for('posts.update_post', post_id=post.id) }}"
+                                       class="card-link btn  btn-primary">Edit</a>
+                                    <a href="{{ url_for('posts.delete_post', post_id=post.id) }}"
+                                       class="btn btn-outline-danger">Delete</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                        {% if page_num %}
+                            {% if posts.page == page_num %}
+                                <li class="page-item active"><a class="page-link"
+                                                                href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link"
+                                                         href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            ...
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-4">
+            <div class="position-sticky" style="top: 2rem;">
+                <div class="p-4 mb-3 bg-light rounded">
+                    <h4 class="fst-italic">About</h4>
+                    <p class="mb-0">Customize this section to tell your visitors a little bit about your
+                        publication,
+                        writers, content, or something else entirely. Totally up to you.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
