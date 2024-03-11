@@ -42,8 +42,9 @@ class Post(db.Model):
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    def __repr__(self):
-        return f"Post('id: {self.id}', '{self.title}', '{self.date_posted}', 'user_id: {self.user_id}')"
+    def __init__(self, title, content):
+        self.title = title
+        self.content = content
 
 
 
