@@ -32,7 +32,7 @@ def create_app(config_class=Config):
     from blog.main.routes import main
     from blog.errors.handlers import errors
     from blog.api.views import api_bp
-    #from blog.api.routes import api
+    from blog.api.routes import api
 
     
 
@@ -40,6 +40,7 @@ def create_app(config_class=Config):
     app.register_blueprint(posts)
     app.register_blueprint(main)
     app.register_blueprint(errors)
+    app.register_blueprint(api, url_prefix='/api/v2')
     app.register_blueprint(api_bp, url_prefix='/api/v1')
 
     return app

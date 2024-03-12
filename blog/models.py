@@ -42,9 +42,10 @@ class Post(db.Model):
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    def __init__(self, title, content):
+    def __init__(self, title, content, user_id):
         self.title = title
         self.content = content
+        self.user_id = user_id
 
 
 
